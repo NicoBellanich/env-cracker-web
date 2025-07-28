@@ -1,5 +1,8 @@
 # env-cracker-web
 
+This app let you upload proprietary file with ".env" extension and download the zip with all the content
+
+
 ## Run project with docker
 
 1. run :  `docker pull nicolasbellanich/env-cracker-web:latest`
