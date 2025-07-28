@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>File Extractor</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 2rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+      color: #333;
+    }
+
+    .custom-file-upload {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      cursor: pointer;
+      background-color: #e0e0e0;
+      border-radius: 8px;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    #fileName {
+      display: block;
+      margin-bottom: 1rem;
+      color: #555;
+      font-size: 0.9rem;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .message {
+      margin-top: 1rem;
+      color: #28a745;
+      display: none;
+    }
+
+    #restartBtn {
+      margin-top: 1rem;
+      background-color: #6c757d;
+    }
+
+    #restartBtn:hover {
+      background-color: #5a6268;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="mainContainer">
+    <h1>Upload Your File</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+      <label class="custom-file-upload">
+        <input type="file" name="file" id="fileInput" accept=".env" required />
+        Choose File (.env)
+      </label>
+      <span id="fileName">No file selected</span>
+      <button type="submit">Extract</button>
+    </form>
+    <p class="message" id="successMsg">Download starting...</p>
+    <button id="restartBtn" style="display: none;">Choose Another File</button>
+  </div>
+
+  <script>
+    const input = document.getElementById('fileInput');
+    const fileNameSpan = document.getElementById('fileName');
+    const form = document.getElementById('uploadForm');
+    const successMsg = document.getElementById('successMsg');
+    const restartBtn = document.getElementById('restartBtn');
+
+    input.addEventListener('change', () => {
+      const file = input.files[0];
+      if (file) {
+        fileNameSpan.textContent = file.name;
+      } else {
+        fileNameSpan.textContent = 'No file selected';
+      }
+    });
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      try {
+        const res = await fetch('/upload', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!res.ok) {
+          alert("There was an error processing your file.");
+          return;
+        }
+
+        const blob = await res.blob();
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = "extracted.zip";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        successMsg.style.display = 'block';
+        restartBtn.style.display = 'inline-block';
+        form.style.display = 'none';
+      } catch (err) {
+        alert("Upload failed. Please try again.");
+      }
+    });
+
+    restartBtn.addEventListener('click', () => {
+      form.reset();
+      input.value = '';
+      fileNameSpan.textContent = 'No file selected';
+      form.style.display = 'block';
+      successMsg.style.display = 'none';
+      restartBtn.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
