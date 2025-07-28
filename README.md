@@ -19,13 +19,13 @@ Many internal tools or legacy systems store multiple files inside custom binary 
 [![Visit Live Demo](https://img.shields.io/badge/Visit-Demo-blue?style=for-the-badge)](https://env-cracker-web-production.up.railway.app/)
 
 
-## Run project with docker 🐳
+## 🐳 Run project with docker 
 
 1. run :  `docker pull nicolasbellanich/env-cracker-web:latest`
 1. run :  `docker run -p 8080:8080 nicolasbellanich/env-cracker-web:latest`
 
 
-## Run project locally 💻
+## 💻 Run project locally 
 
 1. Clone this repo
 2. run : `go run cmd/api/main.go`
