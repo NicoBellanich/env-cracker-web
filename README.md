@@ -1,8 +1,23 @@
 # env-cracker-web 🔓
 
-This app let you upload proprietary file with `.env` extension and download the zip with all the content
+This app lets you upload a proprietary `.env` file and download a ZIP archive containing the extracted embedded files.
 
 ![Image of the app](./app.png)
+
+## 📝 Project Purpose
+
+Many internal tools or legacy systems store multiple files inside custom binary formats. `env-cracker-web` is designed to extract those embedded files from `.env` files in a user-friendly way, without needing to reverse engineer manually. This can be useful for internal forensics, debugging, or documentation purposes.
+
+## 📦 Input & Output Format
+
+- **Input**: A single binary file with `.env` extension, containing embedded files in a custom format.
+- **Output**: A `.zip` archive containing all the extracted files with correct filenames and extensions.
+
+
+## 🔗 Live Demo
+
+[![Visit Live Demo](https://img.shields.io/badge/Visit-Demo-blue?style=for-the-badge)](https://env-cracker-web-production.up.railway.app/)
+
 
 ## Run project with docker 🐳
 
