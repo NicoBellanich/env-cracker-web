@@ -83,7 +83,7 @@ func ParseCustomFormat(data []byte) []EmbeddedFile {
 
 	for i, chunk := range chunks {
 		if i == 0 {
-			continue // omitir cualquier header
+			continue
 		}
 
 		metaAndData := extractMetadataAndData(chunk)
@@ -101,7 +101,6 @@ func extractMetadataAndData(chunk []byte) *EmbeddedFile {
 	var ext string
 	var content []byte
 
-	// Buscar FILENAME y EXT
 	for {
 		line, _, err := reader.ReadLine()
 		if err != nil {
