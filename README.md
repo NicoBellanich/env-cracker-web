@@ -2,6 +2,7 @@
 
 This app let you upload proprietary file with ".env" extension and download the zip with all the content
 
+![Image of the app](./app.png)
 
 ## Run project with docker
 
