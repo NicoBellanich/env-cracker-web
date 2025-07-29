@@ -13,19 +13,17 @@ Many internal tools or legacy systems store multiple files inside custom binary 
 - **Input**: A single binary file with `.env` extension, containing embedded files in a custom format.
 - **Output**: A `.zip` archive containing all the extracted files with correct filenames and extensions.
 
-
 ## 🔗 Live Demo
 
 [![Visit Live Demo](https://img.shields.io/badge/Visit-Demo-blue?style=for-the-badge)](https://env-cracker-web-production.up.railway.app/)
 
+## 🐳 Run project with Docker
 
-## 🐳 Run project with docker 
+1. Ensure Docker is installed by running `docker --version`, which should return a message like `Docker version ...`.
+2. Run: `docker pull nicolasbellanich/env-cracker-web:latest`
+3. Run: `docker run -p 8080:8080 nicolasbellanich/env-cracker-web:latest`
 
-1. run :  `docker pull nicolasbellanich/env-cracker-web:latest`
-1. run :  `docker run -p 8080:8080 nicolasbellanich/env-cracker-web:latest`
+## 💻 Run project locally
 
-
-## 💻 Run project locally 
-
-1. Clone this repo
-2. run : `go run cmd/api/main.go`
+1. Clone this repo.
+2. Navigate to the root directory and run: `go run ./...`
